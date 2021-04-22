@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global attributes</title>
+    <style type="text/css">
+        .dragArea {
+            width: 600px;
+            height: 200px;
+            background-color: #fff;
+            border: 1px #000 solid;
+        }
+        .dragBox {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            position: absolute;
+            color: #fff;
+            background-color: #000;
+            border: 1px #fff solid;
+            border-radius: 10px;
+        }
+        p[data-id]:after {
+            content: "Data ID : " attr(data-id);
+            margin-left: 5px;
+            padding: 5px;
+            opacity: 0;
+            transition: 0.5s opacity;
+            color: #fff;
+            background-color: #000;
+            border: 1px #fff solid;
+        }
+        p[data-id]:hover:after {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Global attributes</h1>
+    <b>⦁ accesskey</b>
+    <p>Press the i button with the command.</p>
+    <input type="text" accesskey="i"/>
+    <br><br>
+    <b>⦁ class</b>
+    <p>Enter the text and press the button.</p>
+    <input type="text" class="testClass"/>
+    <button type="button" onclick="alert('Value of testClass : ' + document.getElementsByClassName('testClass')[0].value);">Print</button>
+    <br><br>
+    <b>⦁ contenteditable</b>
+    <p contenteditable>This text is editable.</p>
+    <b>⦁ data-*</b>
+    <p id="no1" data-id="13">No.1</p>
+    <p data-id="37">No.2</p>
+    <p data-id="4">No.3</p>
+    <b>⦁ dir</b>
+    <p dir="ltr">This text is printed from left to right.</p>
+    <p dir="rtl">This text is printed from right to left.</p>
+    <b>⦁ draggable</b>
+    <br><br>
+    <div class="dragArea" ondragover="main.dragOverEvent(event)" ondrop="main.dropEvent(event);">
+        <div class="dragBox" draggable="true">Drag</div>
+    </div>
+    <br>
+    <b>⦁ hidden</b>
+    <br><br>
+    <div class="hiddenText">When you click the button, this text will be hidden.</div>
+    <br>
+    <button type="button" class="hiddenButton" onclick="main.hiddenEvent()">Hide</button>
+    <br><br>
+    <b>⦁ id</b>
+    <p>Enter the text and press the button.</p>
+    <input type="text" id="testId"/>
+    <button type="button" onclick="alert('Value of testId : ' + document.getElementById('testId').value);">Print</button>
+    <br><br>
+    <b>⦁ lang</b>
+    <p lang="en">This text is written in English.</p>
+    <b>⦁ spellcheck</b>
+    <p contenteditable spellcheck="true">This is the corecct santence.</p>
+    <b>⦁ style</b>
+    <p style="color: #FF4500">The color of this text is #FF4500.</p>
+    <b>⦁ tabindex</b>
+    <p tabindex="0">Press Tab to move the focus.</p>
+    <p tabindex="0">Press Tab to move the focus.</p>
+    <p tabindex="-1">You can move the focus with only mouse click.</p>
+    <p tabindex="0">Press Tab to move the focus.</p>
+    <b>⦁ title</b>
+    <p>This web page was developed with <abbr title="HyperText Markup Language">HTML</abbr>, <abbr title="Cascading Style Sheets">CSS</abbr>, and <abbr title="JavaScript">JS</abbr>.</p>
+    <b>⦁ translate</b>
+    <p><span translate="no">Adidas</span> since 1949</p>
+
+    <script type="text/javascript">
+        let main = {
+            dragOverEvent: function(event) {
+                event.preventDefault();
+            },
+            dropEvent: function(event) {
+                let dragBox = document.getElementsByClassName("dragBox")[0];
+                dragBox.style.left = event.clientX - dragBox.offsetWidth / 2 + "px";
+                dragBox.style.top = event.clientY - dragBox.offsetHeight / 2 + "px";
+            },
+            hiddenEvent: function() {
+                let text = document.getElementsByClassName("hiddenText")[0];
+                let btn = document.getElementsByClassName("hiddenButton")[0];
+
+                if (text.hidden == true) {
+                    text.hidden = false;
+                    btn.textContent = "Hide";
+                } else {
+                    text.hidden = true;
+                    btn.textContent = "Show";
+                }
+            }
+        };
+    </script>
+</body>
+</html>
